@@ -3,6 +3,9 @@ env:
   node: true
   es2021: true
 extends: [ 'eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier' ]
+globals:
+  BodyInit: readonly
+  HeadersInit: readonly
 parser: 'vue-eslint-parser'
 parserOptions:
   parser: '@typescript-eslint/parser'

@@ -19,6 +19,7 @@ const toggleColorMode = () => {
     <INavbarCollapsible>
       <INav>
         <INavItem :to="{ name: 'Home' }">Inicio</INavItem>
+        <INavItem :to="{ name: 'ListBooks' }">Libros</INavItem>
       </INav>
       <INav>
         <INavItem stop-propagation class="clickable" @click="toggleColorMode">

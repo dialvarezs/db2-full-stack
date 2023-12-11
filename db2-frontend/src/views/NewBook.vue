@@ -16,8 +16,9 @@ import {
 import { computed, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { getAuthors, postBook } from '../api'
-import { Author, Book } from '../interfaces'
+import { getAuthors, getCategories, postBook } from '../api'
+import BookForm from '../components/forms/BookForm.vue'
+import { Author, Book, Category } from '../interfaces'
 
 const router = useRouter()
 const book: Book = reactive({
@@ -30,58 +31,35 @@ const book: Book = reactive({
   categories: []
 })
 const authors: Author[] = reactive([])
-const authorOptions = computed(() => {
-  return authors.map((x) => ({ id: x.id, label: x.name }))
-})
+const categories: Category[] = reactive([])
 
 const loadAuthors = async () => {
   Object.assign(authors, await getAuthors())
 }
-const saveBook = async () => {
+const loadCategories = async () => {
+  Object.assign(categories, await getCategories())
+}
+const saveBook = async (updatedBook: Book) => {
+  Object.assign(book, updatedBook)
   book.year = parseInt(String(book.year))
   await postBook(book)
-  await router.push({ name: 'Home' })
+  await router.push({ name: 'ListBooks' })
 }
 
 loadAuthors()
+loadCategories()
 </script>
 
 <template>
   <IContainer class="_margin-top:2!">
     <IRow center>
       <IColumn xs="6">
-        <IForm>
-          <IFormGroup>
-            <IFormLabel>Título</IFormLabel>
-            <IInput v-model="book.title"></IInput>
-          </IFormGroup>
-          <IFormGroup>
-            <IFormLabel>Descripción</IFormLabel>
-            <ITextarea v-model="book.description"></ITextarea>
-          </IFormGroup>
-          <IFormGroup>
-            <IFormLabel>Idioma</IFormLabel>
-            <IInput v-model="book.language"></IInput>
-          </IFormGroup>
-          <IFormGroup>
-            <IFormLabel>ISBN</IFormLabel>
-            <IInput v-model="book.isbn"></IInput>
-          </IFormGroup>
-          <IFormGroup>
-            <IFormLabel>Año</IFormLabel>
-            <INumberInput v-model="book.year"></INumberInput>
-          </IFormGroup>
-          <IFormGroup>
-            <IFormLabel>Autor</IFormLabel>
-            <ISelect v-model="book.authorId" :options="authorOptions"></ISelect>
-          </IFormGroup>
-          <IFormGroup class="_margin-top:3!">
-            <IButtonGroup block>
-              <IButton color="primary" @click="saveBook">Guardar</IButton>
-              <IButton color="gray" :to="{ name: 'Home' }">Cancelar</IButton>
-            </IButtonGroup>
-          </IFormGroup>
-        </IForm>
+        <BookForm
+          :authors="authors"
+          :categories="categories"
+          @save-book="saveBook"
+          @cancel="router.push({ name: 'ListBooks' })"
+        ></BookForm>
       </IColumn>
     </IRow>
   </IContainer>
