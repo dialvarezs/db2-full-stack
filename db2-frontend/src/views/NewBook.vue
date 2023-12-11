@@ -1,9 +1,23 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
-import { Author, Book } from '../interfaces'
-import { IRow } from '@inkline/inkline'
-import { getAuthors, postBook } from '../api'
+import {
+  IButton,
+  IButtonGroup,
+  IColumn,
+  IContainer,
+  IForm,
+  IFormGroup,
+  IFormLabel,
+  IInput,
+  INumberInput,
+  IRow,
+  ISelect,
+  ITextarea
+} from '@inkline/inkline'
+import { computed, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+
+import { getAuthors, postBook } from '../api'
+import { Author, Book } from '../interfaces'
 
 const router = useRouter()
 const book: Book = reactive({
@@ -38,33 +52,33 @@ loadAuthors()
       <IColumn xs="6">
         <IForm>
           <IFormGroup>
-            <FormLabel>Título</FormLabel>
+            <IFormLabel>Título</IFormLabel>
             <IInput v-model="book.title"></IInput>
           </IFormGroup>
           <IFormGroup>
-            <FormLabel>Descripción</FormLabel>
+            <IFormLabel>Descripción</IFormLabel>
             <ITextarea v-model="book.description"></ITextarea>
           </IFormGroup>
           <IFormGroup>
-            <FormLabel>Idioma</FormLabel>
+            <IFormLabel>Idioma</IFormLabel>
             <IInput v-model="book.language"></IInput>
           </IFormGroup>
           <IFormGroup>
-            <FormLabel>ISBN</FormLabel>
+            <IFormLabel>ISBN</IFormLabel>
             <IInput v-model="book.isbn"></IInput>
           </IFormGroup>
           <IFormGroup>
-            <FormLabel>Año</FormLabel>
+            <IFormLabel>Año</IFormLabel>
             <INumberInput v-model="book.year"></INumberInput>
           </IFormGroup>
           <IFormGroup>
-            <FormLabel>Autor</FormLabel>
+            <IFormLabel>Autor</IFormLabel>
             <ISelect v-model="book.authorId" :options="authorOptions"></ISelect>
           </IFormGroup>
-          <IFormGroup>
+          <IFormGroup class="_margin-top:3!">
             <IButtonGroup block>
-              <IButton color="primary" @click="saveBook"> Guardar </IButton>
-              <IButton color="gray" :to="{ name: 'Home' }"> Cancelar </IButton>
+              <IButton color="primary" @click="saveBook">Guardar</IButton>
+              <IButton color="gray" :to="{ name: 'Home' }">Cancelar</IButton>
             </IButtonGroup>
           </IFormGroup>
         </IForm>

@@ -1,11 +1,12 @@
-import { snakeCase, camelCase } from 'change-case/keys'
+import { camelCase, snakeCase } from 'change-case/keys'
+
 import { Author, Book } from './interfaces'
 
 const baseUrl = 'http://127.0.0.1:8000'
 
 async function getBooks(): Promise<Book[]> {
   const response = await fetch(`${baseUrl}/books`)
-  return camelCase(await response.json(), { depth: 3 })
+  return camelCase(await response.json(), 3) as Book[]
 }
 
 async function postBook(book: Book) {
@@ -18,7 +19,7 @@ async function postBook(book: Book) {
 
 async function getAuthors(): Promise<Author[]> {
   const response = await fetch(`${baseUrl}/authors`)
-  return camelCase(await response.json(), { depth: 3 })
+  return camelCase(await response.json(), 3) as Author[]
 }
 
 async function postAuthor(author: Author) {

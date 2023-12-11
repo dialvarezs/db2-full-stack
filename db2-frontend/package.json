@@ -17,8 +17,12 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/vue-fontawesome": "^3.0.5",
     "@inkline/config": "^1.9.1",
     "@inkline/plugin": "^1.5.2",
+    "@trivago/prettier-plugin-sort-imports": "github:trivago/prettier-plugin-sort-imports",
     "@typescript-eslint/parser": "^6.13.2",
     "@vitejs/plugin-vue": "^4.5.1",
     "eslint": "^8.55.0",
