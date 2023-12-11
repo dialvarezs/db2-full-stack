@@ -18,7 +18,7 @@ class BookCopy(Base):
     is_available: Mapped[bool] = mapped_column(default=True)
 
     # relationships
-    book: "Mapped[Book]" = relationship(back_populates="copies")
+    book: "Mapped[Book]" = relationship("Book", back_populates="copies")
     loans: "Mapped[list[Loan]]" = relationship(back_populates="book_copy")
 
 
@@ -79,17 +79,6 @@ class BookCategory(Base):
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), primary_key=True)
 
 
-class Client(Base):
-    __tablename__ = "clients"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str]
-    email: Mapped[Optional[str]]
-
-    # relationships
-    loans: "Mapped[list[Loan]]" = relationship(back_populates="client")
-
-
 class Loan(Base):
     __tablename__ = "loans"
 
@@ -104,3 +93,26 @@ class Loan(Base):
     # relationships
     client: "Mapped[Client]" = relationship(back_populates="loans")
     book_copy: "Mapped[BookCopy]" = relationship(back_populates="loans")
+
+
+class Client(Base):
+    __tablename__ = "clients"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    email: Mapped[Optional[str]]
+
+    # computed
+    penalty_debt: Mapped[int] = column_property(
+        select(func.coalesce(func.sum(Loan.penalty_fee), 0))
+        .where(and_(Loan.client_id == id, Loan.penalty_fee_paid.is_(False)))
+        .scalar_subquery()
+    )
+    borrowed_books: Mapped[int] = column_property(
+        select(func.count(Loan.id))
+        .where(and_(Loan.client_id == id, Loan.return_date.is_(None)))
+        .scalar_subquery()
+    )
+
+    # relationships
+    loans: "Mapped[list[Loan]]" = relationship(back_populates="client")

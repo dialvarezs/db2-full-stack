@@ -1,6 +1,6 @@
 from litestar.contrib.sqlalchemy.dto import SQLAlchemyDTO, SQLAlchemyDTOConfig
 
-from app.models import Author, Book, BookCopy, Category, Loan
+from app.models import Author, Book, BookCopy, Category, Client, Loan
 
 
 class AuthorReadDTO(SQLAlchemyDTO[Author]):
@@ -28,14 +28,29 @@ class BookReadFullDTO(SQLAlchemyDTO[Book]):
 
 
 class BookWriteDTO(SQLAlchemyDTO[Book]):
-    config = SQLAlchemyDTOConfig(exclude={"id", "author", "categories.0.name"})
+    config = SQLAlchemyDTOConfig(
+        include={
+            "isbn",
+            "title",
+            "description",
+            "year",
+            "language",
+            "author_id",
+            "categories.0.id",
+            "copies.0.serial_number",
+        }
+    )
 
 
 class BookUpdateDTO(SQLAlchemyDTO[Book]):
-    config = SQLAlchemyDTOConfig(exclude={"id", "author"}, partial=True)
+    config = SQLAlchemyDTOConfig(exclude={"id", "author", "copies_available"}, partial=True)
 
 
 class BookCopyReadDTO(SQLAlchemyDTO[BookCopy]):
+    config = SQLAlchemyDTOConfig(exclude={"loans"})
+
+
+class BookCopyReadFullDTO(SQLAlchemyDTO[BookCopy]):
     pass
 
 
@@ -51,10 +66,31 @@ class CategoryWriteDTO(SQLAlchemyDTO[Category]):
     config = SQLAlchemyDTOConfig(exclude={"id", "books"})
 
 
+class ClientReadDTO(SQLAlchemyDTO[Client]):
+    config = SQLAlchemyDTOConfig(exclude={"loans"})
+
+
+class ClientWriteDTO(SQLAlchemyDTO[Client]):
+    config = SQLAlchemyDTOConfig(exclude={"id", "loans", "penalty_debt", "borrowed_books"})
+
+
+class ClientUpdateDTO(SQLAlchemyDTO[Client]):
+    config = SQLAlchemyDTOConfig(
+        exclude={"id", "loans", "penalty_debt", "borrowed_books"}, partial=True
+    )
+
+
 class LoanReadDTO(SQLAlchemyDTO[Loan]):
     pass
 
 
-class LoanWriteDTO(SQLAlchemyDTO[Loan]):
-    config = SQLAlchemyDTOConfig(exclude={"id", "client", "book_copy"})
+class LoanReadWithBookDTO(SQLAlchemyDTO[Loan]):
+    config = SQLAlchemyDTOConfig(exclude={"client.loans", "book_copy.loans"}, max_nested_depth=2)
 
+
+class LoanBorrowDTO(SQLAlchemyDTO[Loan]):
+    config = SQLAlchemyDTOConfig(include={"client_id", "book_copy_id", "loan_date"})
+
+
+class LoanReturnDTO(SQLAlchemyDTO[Loan]):
+    config = SQLAlchemyDTOConfig(include={"return_date", "penalty_fee_paid"})
