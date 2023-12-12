@@ -11,7 +11,7 @@ import {
   ISelect,
   ITextarea
 } from '@inkline/inkline'
-import { computed, reactive } from 'vue'
+import { computed, reactive, Ref, ref } from 'vue'
 
 import { Author, Book, Category } from '@/interfaces'
 
@@ -37,8 +37,10 @@ const book: Book = reactive({
   isbn: '',
   year: null,
   authorId: null,
-  categories: []
+  categories: [],
+  copies: []
 })
+const selectedCategories: Ref<number[]> = ref([])
 
 const authorOptions = computed(() => {
   return props.authors.map((x) => ({ id: x.id, label: x.name }))
@@ -49,6 +51,15 @@ const categoryOptions = computed(() => {
 
 if (props.inputBook !== null) {
   Object.assign(book, props.inputBook)
+}
+
+const saveBook = () => {
+  // update book.categories based on selectedCategories
+  book.categories = props.categories
+    .filter((x) => selectedCategories.value.includes(x.id as number))
+    .map((x) => ({ id: x.id }))
+
+  emit('saveBook', book)
 }
 </script>
 
@@ -80,11 +91,15 @@ if (props.inputBook !== null) {
     </IFormGroup>
     <IFormGroup>
       <IFormLabel>Categorías</IFormLabel>
-      <ICheckboxGroup v-model="book.categories" inline :options="categoryOptions"></ICheckboxGroup>
+      <ICheckboxGroup
+        v-model="selectedCategories"
+        inline
+        :options="categoryOptions"
+      ></ICheckboxGroup>
     </IFormGroup>
     <IFormGroup class="_margin-top:3!">
       <IButtonGroup block>
-        <IButton color="primary" @click="emit('saveBook', book)">Guardar</IButton>
+        <IButton color="primary" @click="saveBook">Guardar</IButton>
         <IButton color="gray" @click="emit('cancel')">Cancelar</IButton>
       </IButtonGroup>
     </IFormGroup>

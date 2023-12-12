@@ -9,7 +9,7 @@ import Header from './components/Header.vue'
     <ILayoutHeader>
       <Header></Header>
     </ILayoutHeader>
-    <ILayoutContent>
+    <ILayoutContent class="_padding-top:2!">
       <RouterView></RouterView>
     </ILayoutContent>
   </ILayout>

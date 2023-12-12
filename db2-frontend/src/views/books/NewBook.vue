@@ -4,7 +4,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { getAuthors, getCategories, postBook } from '@/api'
-import { Author, Book, Category } from '@/interfaces'
+import { Author, Book, Category } from '@/interfaces.ts'
 
 import BookForm from '@/components/forms/BookForm.vue'
 
@@ -40,9 +40,10 @@ loadCategories()
 </script>
 
 <template>
-  <IContainer class="_margin-top:2!">
-    <IRow center>
-      <IColumn xs="6">
+  <IContainer>
+    <IRow around>
+      <IColumn md="8" lg="6">
+        <h1 class="_color:primary">Nuevo Libro</h1>
         <BookForm
           :authors="authors"
           :categories="categories"

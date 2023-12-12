@@ -7,6 +7,10 @@ async function getBooks(): Promise<Book[]> {
   return apiFetch<Book[]>('/books')
 }
 
+async function getBook(bookId: number | string): Promise<Book> {
+  return apiFetch<Book>(`/books/${bookId}`)
+}
+
 async function postBook(book: Book) {
   return apiFetch<Book>('/books', 'POST', JSON.stringify(snakeCase(book)))
 }
@@ -23,4 +27,4 @@ async function getCategories() {
   return apiFetch<Category[]>('/categories')
 }
 
-export { getAuthors, getBooks, getCategories, postAuthor, postBook }
+export { getAuthors, getBooks, getBook, getCategories, postAuthor, postBook }
