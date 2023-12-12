@@ -7,7 +7,7 @@ export interface Book {
   language: string
   authorId: number | null
   author?: Author
-  categories?: Category[]
+  categories?: Category[] | number[]
 }
 
 export interface Author {

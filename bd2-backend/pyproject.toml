@@ -21,7 +21,6 @@ dev = [
 [tool.pdm.scripts]
 _.env_file = ".env"
 shell = { shell = "$SHELL" }
-alembic = "alembic"
 start = "litestar run --reload"
 ruff_format = "ruff format app/ migrations/"
 ruff_sortimports = "ruff --select I --fix app/ migrations/"

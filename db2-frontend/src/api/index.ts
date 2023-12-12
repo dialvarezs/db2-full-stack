@@ -23,4 +23,4 @@ async function getCategories() {
   return apiFetch<Category[]>('/categories')
 }
 
-export { getBooks, getAuthors, postBook, postAuthor, getCategories }
+export { getAuthors, getBooks, getCategories, postAuthor, postBook }

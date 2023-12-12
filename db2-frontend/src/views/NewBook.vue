@@ -1,24 +1,12 @@
 <script setup lang="ts">
-import {
-  IButton,
-  IButtonGroup,
-  IColumn,
-  IContainer,
-  IForm,
-  IFormGroup,
-  IFormLabel,
-  IInput,
-  INumberInput,
-  IRow,
-  ISelect,
-  ITextarea
-} from '@inkline/inkline'
-import { computed, reactive } from 'vue'
+import { IColumn, IContainer, IRow } from '@inkline/inkline'
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { getAuthors, getCategories, postBook } from '../api'
-import BookForm from '../components/forms/BookForm.vue'
-import { Author, Book, Category } from '../interfaces'
+import { getAuthors, getCategories, postBook } from '@/api'
+import { Author, Book, Category } from '@/interfaces'
+
+import BookForm from '@/components/forms/BookForm.vue'
 
 const router = useRouter()
 const book: Book = reactive({
@@ -42,6 +30,7 @@ const loadCategories = async () => {
 const saveBook = async (updatedBook: Book) => {
   Object.assign(book, updatedBook)
   book.year = parseInt(String(book.year))
+  // book.categories = book.categories.map((categoryId: ) => category.id)
   await postBook(book)
   await router.push({ name: 'ListBooks' })
 }

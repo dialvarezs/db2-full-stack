@@ -13,7 +13,7 @@ import {
 } from '@inkline/inkline'
 import { computed, reactive } from 'vue'
 
-import { Author, Book, Category } from '../../interfaces.ts'
+import { Author, Book, Category } from '@/interfaces'
 
 interface Props {
   inputBook?: Book | null
@@ -80,7 +80,7 @@ if (props.inputBook !== null) {
     </IFormGroup>
     <IFormGroup>
       <IFormLabel>Categorías</IFormLabel>
-      <ICheckboxGroup inline v-model="book.categories" :options="categoryOptions"></ICheckboxGroup>
+      <ICheckboxGroup v-model="book.categories" inline :options="categoryOptions"></ICheckboxGroup>
     </IFormGroup>
     <IFormGroup class="_margin-top:3!">
       <IButtonGroup block>
