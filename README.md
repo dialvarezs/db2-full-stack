@@ -18,11 +18,11 @@ Esto se puede lograr de dos formas:
 
 #### Opción A
 
-Abrir cada carpeta (`bd2-backend` y `db2-frontend`) por separado en ventanas diferentes de Visual Studio Code.
+Abrir cada carpeta (`db2-backend` y `db2-frontend`) por separado en ventanas diferentes de Visual Studio Code.
 
 #### Opción B
 
-Abrir primero la carpeta `bd2-backend` y luego utilizar la opción `File > Add Folder to Workspace...` para agregar la
+Abrir primero la carpeta `db2-backend` y luego utilizar la opción `File > Add Folder to Workspace...` para agregar la
 carpeta `db2-frontend` al mismo espacio de trabajo.
 
 ![Agregar carpeta al espacio de trabajo](docs/add_folder_to_ws.png)
