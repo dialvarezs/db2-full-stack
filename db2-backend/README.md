@@ -4,6 +4,7 @@
 
 Este proyecto implementa una API REST para un sistema de gestión de biblioteca.
 Las tecnologías utilizadas son:
+
 - Lenguaje de programación: Python (3.10+)
 - Gestor de dependencias: PDM
 - Framework web: Litestar
@@ -70,5 +71,6 @@ flujo de trabajo.
   todo esté funcionando correctamente.
 
 ## En caso de errores...
+
 - Recuerda que en general la última línea de error es la más importante para identificar el problema.
 - Si el error impide que parta el servidor de desarrollo, revisa que no haya errores de sintaxis en el código.
