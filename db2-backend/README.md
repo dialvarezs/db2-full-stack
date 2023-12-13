@@ -1,5 +1,15 @@
 # Projecto 3 (backend)
 
+## Contexto
+
+Este proyecto implementa una API REST para un sistema de gestión de biblioteca.
+Las tecnologías utilizadas son:
+- Lenguaje de programación: Python (3.10+)
+- Gestor de dependencias: PDM
+- Framework web: Litestar
+- Base de datos: PostgreSQL
+- ORM: SQLAlchemy y Alembic (migraciones)
+
 ## ¿Cómo configurar el entorno para el proyecto?
 
 1. Instala las dependencias del proyecto con PDM

@@ -1,5 +1,16 @@
 # Projecto 3 (frontend)
 
+## Contexto
+
+Este proyecto implementa una interfaz web para un sistema de gestión de biblioteca.
+Las tecnologías utilizadas son:
+
+- Lenguaje de programación: Typescript
+- Gestor de dependencias: PNPM
+- Framework web: Vue 3 (composition API)
+- Librería de componentes: Inkline
+- Otras librerías: Vue Router, Pinia
+
 ## ¿Cómo configurar el entorno para el proyecto?
 
 1. Instala las dependencias del proyecto con PNPM
@@ -25,6 +36,22 @@ procedimiento:
 Es importante considerar que este flujo de trabajo aplicaría sólo para implementar nuevas páginas, pero en caso de
 querer añadir nuevas funcionalidades o modificar las existentes, es flujo de trabajo será más específico y dependerá
 de la funcionalidad a implementar.
+
+### Si quieres usar nuevos íconos
+
+La librerías de íconos que utiliza el proyecto es Font Awesome 6. Para utilizar nuevos íconos, primero debes
+[buscar el ícono que deseas](https://fontawesome.com/search?o=r&m=free) y luego importarlo en el archivo `main.ts` junto
+a los íconos ya importados. Por ejemplo, para el ícono "user":
+
+```typescript
+// Agrega faUser al import
+import { faCircleInfo, faEdit, faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons'
+// ...
+// Agrega faUser al objeto de íconos
+library.add(faCircleInfo, faEdit, faMoon, faSun, faUser)
+```
+
+Esto permitirá utilizar el ícono en cualquier parte del proyecto a través del componente `FontAwesomeIcon`.
 
 ## Recomendaciones
 
