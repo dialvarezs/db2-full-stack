@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IButton, ICard } from '@inkline/inkline'
+import { IBadge, IButton, ICard } from '@inkline/inkline'
 
 import { Book } from '@/interfaces.ts'
 
@@ -26,11 +26,22 @@ defineProps<{
     <h5>{{ book.author?.name }}</h5>
     <div class="_display:flex">
       <div class="_flex-grow:1">
-        <p class="_color:gray! _margin-bottom:0">{{ book.description }}</p>
+        <p class="_color:gray! _margin-bottom:1/2">{{ book.description }}</p>
       </div>
-      <div>Disponibles: {{ book.copiesAvailable }}</div>
+      <div class="no-wrap">
+        <div class="_margin-bottom:1/2">
+          <IBadge v-for="category in book.categories" :key="category.id" class="_margin-x:1/4">
+            {{ category.name }}
+          </IBadge>
+        </div>
+        <div class="_text-align:right">Disponibles: {{ book.copiesAvailable }}</div>
+      </div>
     </div>
   </ICard>
 </template>
 
-<style scoped></style>
+<style scoped>
+.no-wrap {
+  flex-shrink: 0;
+}
+</style>

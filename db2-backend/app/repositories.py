@@ -58,7 +58,7 @@ class LoanRepository(SQLAlchemySyncRepository[Loan]):
         # check if book copy is available and client can borrow
         if not book_copy.is_available:
             raise Exception("Book copy already borrowed")
-        if client.borrowed_booe.__cause__ks > 2:
+        if client.borrowed_books > 2:
             raise Exception("Client already borrowed 2 books")
 
         # save loan and update book copy

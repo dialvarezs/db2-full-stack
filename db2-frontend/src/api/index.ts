@@ -15,6 +15,10 @@ async function postBook(book: Book) {
   return apiFetch<Book>('/books', 'POST', JSON.stringify(snakeCase(book)))
 }
 
+async function updateBook(book: Book) {
+  return apiFetch<Book>(`/books/${book.id}`, 'PATCH', JSON.stringify(snakeCase(book)))
+}
+
 async function getAuthors(): Promise<Author[]> {
   return apiFetch<Author[]>('/authors')
 }
@@ -27,4 +31,4 @@ async function getCategories() {
   return apiFetch<Category[]>('/categories')
 }
 
-export { getAuthors, getBooks, getBook, getCategories, postAuthor, postBook }
+export { getBooks, getBook, postBook, updateBook, getAuthors, postAuthor, getCategories }

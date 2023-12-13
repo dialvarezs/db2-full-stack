@@ -43,7 +43,9 @@ class BookWriteDTO(SQLAlchemyDTO[Book]):
 
 
 class BookUpdateDTO(SQLAlchemyDTO[Book]):
-    config = SQLAlchemyDTOConfig(exclude={"id", "author", "copies_available"}, partial=True)
+    config = SQLAlchemyDTOConfig(
+        exclude={"id", "author", "copies_available", "copies"}, partial=True
+    )
 
 
 class BookCopyReadDTO(SQLAlchemyDTO[BookCopy]):

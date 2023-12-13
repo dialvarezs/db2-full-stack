@@ -3,7 +3,7 @@ import { IContainer } from '@inkline/inkline'
 </script>
 
 <template>
-  <IContainer></IContainer>
+  <IContainer>Algo debería ir aquí...</IContainer>
 </template>
 
 <style scoped></style>

@@ -7,9 +7,9 @@ export interface Book {
   language: string
   authorId: number | null
   author?: Author
-  categories?: Category[] | number[]
-  copiesAvailable: number
-  copies: BookCopy
+  categories?: Category[]
+  copiesAvailable?: number
+  copies: BookCopy[]
 }
 
 export interface BookCopy {

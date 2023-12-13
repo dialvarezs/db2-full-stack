@@ -97,13 +97,24 @@ class BookController(Controller):
                 status_code=400,
             ) from e
 
-    @patch("/{book_id:int}", dto=dtos.BookUpdateDTO)
+    @patch(
+        "/{book_id:int}",
+        dto=dtos.BookUpdateDTO,
+        dependencies={"categories_repo": Provide(provide_categories_repo)},
+    )
     async def update_book(
-        self, book_id: int, data: DTOData[Book], books_repo: BookRepository
+        self,
+        book_id: int,
+        data: DTOData[Book],
+        books_repo: BookRepository,
+        categories_repo: CategoryRepository,
     ) -> Book:
         try:
+            data_dict = data.as_builtins()
+            category_ids = [c.id for c in data_dict["categories"]]
+            data_dict["categories"] = categories_repo.list(CollectionFilter("id", category_ids))
             book, updated = books_repo.get_and_update(
-                id=book_id, **data.as_builtins(), match_fields=["id"]
+                id=book_id, **data_dict, match_fields=["id"]
             )
             return book
         except NotFoundError as e:

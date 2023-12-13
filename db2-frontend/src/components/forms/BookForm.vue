@@ -11,7 +11,7 @@ import {
   ISelect,
   ITextarea
 } from '@inkline/inkline'
-import { computed, reactive, Ref, ref } from 'vue'
+import { Ref, computed, onMounted, reactive, ref, watch } from 'vue'
 
 import { Author, Book, Category } from '@/interfaces'
 
@@ -49,9 +49,15 @@ const categoryOptions = computed(() => {
   return props.categories.map((x) => ({ id: x.id, label: x.name }))
 })
 
-if (props.inputBook !== null) {
-  Object.assign(book, props.inputBook)
-}
+watch(
+  () => props.inputBook,
+  () => {
+    if (props.inputBook !== null) {
+      Object.assign(book, props.inputBook)
+      selectedCategories.value = props.inputBook.categories.map((x) => x.id as number)
+    }
+  }
+)
 
 const saveBook = () => {
   // update book.categories based on selectedCategories

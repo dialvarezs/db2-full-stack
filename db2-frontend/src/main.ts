@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircleInfo, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faCircleInfo, faEdit, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Inkline, components } from '@inkline/inkline'
 import '@inkline/inkline/css/index.scss'
@@ -12,7 +12,7 @@ import router from './router'
 import pinia from './stores'
 import './style.css'
 
-library.add(faSun, faMoon, faCircleInfo)
+library.add(faSun, faMoon, faCircleInfo, faEdit)
 
 createApp(App)
   .use(Inkline, { colorMode: 'system', locale: 'es', components })

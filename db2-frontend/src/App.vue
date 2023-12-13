@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ILayout, ILayoutContent, ILayoutHeader } from '@inkline/inkline'
 
-import Header from './components/Header.vue'
+import Header from '@/components/base/Header.vue'
 </script>
 
 <template>
