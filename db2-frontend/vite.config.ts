@@ -1,13 +1,16 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import inkline from '@inkline/plugin/vite';
-import type { UserOptions } from '@inkline/plugin';
+import type { UserOptions } from '@inkline/plugin'
+import inkline from '@inkline/plugin/vite'
+import vue from '@vitejs/plugin-vue'
+import { URL, fileURLToPath } from 'node:url'
+import { defineConfig } from 'vite'
 
 const inklineConfig: UserOptions = {
-    outputDir: 'src/css/variables'
-};
+  outputDir: 'src/css/variables'
+}
 
-// https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [inkline(inklineConfig), vue()]
-});
+  plugins: [inkline(inklineConfig), vue()],
+  resolve: {
+    alias: [{ find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) }]
+  }
+})

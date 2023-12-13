@@ -6,9 +6,9 @@ authors = [
     {name = "Diego Alvarez S.", email = "dialvarezs@gmail.com"},
 ]
 license = {text = "MIT"}
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.13"
 dependencies = [
-    "litestar[sqlalchemy,standard]>=2.4.2",
+    "litestar[sqlalchemy,standard]>=2.4.3",
     "psycopg>=3.1.14",
     "alembic>=1.13.0",
 ]
@@ -23,8 +23,9 @@ _.env_file = ".env"
 shell = { shell = "$SHELL" }
 start = "litestar run --reload"
 ruff_format = "ruff format app/ migrations/"
-ruff_sortimports = "ruff --select I --fix app/"
+ruff_sortimports = "ruff --select I --fix app/ migrations/"
 format = { composite = ["ruff_format", "ruff_sortimports"] }
 
 [tool.ruff]
+select = ["E", "F", "I", "N", "T", "ERA"]
 line-length = 100

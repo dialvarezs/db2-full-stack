@@ -1,35 +1,31 @@
-# Projecto 2 - Bases de Datos 2
+# Projecto 3 (backend)
 
-## ¿Cómo inicializar el projecto?
+## ¿Cómo configurar el entorno para el proyecto?
 
-1. [Crea un fork de este repositorio](https://github.com/dialvarezs/db2-api-project/fork)
-2. Clona el repositorio forkeado desde Visual Studio Code
-
-   ![Clonar](docs/vscode_clone1.png)
-3. Instala las dependencias del proyecto con PDM
+1. Instala las dependencias del proyecto con PDM
    ```shell
    pdm install
    ```
-4. Crea el archivo `.env` en la raíz del proyecto desde el ejemplo `env.example`
+2. Crea el archivo `.env` en la raíz del proyecto desde el ejemplo `env.example`
    ```shell
    cp env.example .env
    ```
    Configura la variable `DATABASE_URL` con la URL de la base de datos que desees utilizar (recordar que debe conservar
    el formato `postgresql+psycopg:///<mi_bd>`).
-5. Crea la base de datos en postgresql.
+3. Crea la base de datos en postgresql.
    ```shell
    createdb <mi_bd>
    ```
    **NOTA:** En WSL podría ser necesario iniciar antes el servicio de postgres con `sudo service postgresql start`.
-6. Ejecuta las migraciones
+4. Ejecuta las migraciones
    ```shell
-   pdm shell
-   alembic upgrade head
+   pdm run alembic upgrade head
    ```
-7. Ejecuta el servidor de desarrollo
+5. Ejecuta el servidor de desarrollo
    ```shell
    pdm start
    ```
+6. Si no hay errores, la documentación de la API estará disponible en http://127.0.0.1:8000/schema/swagger/.
 
 ## ¿Cómo trabajar en el proyecto?
 
@@ -53,3 +49,16 @@ Por regla general el prodedimiento para realizar modificaciones a partir desde e
 5. Crear al menos una DTO para lectura en `app/dtos.py`.
 6. Crear un repositorio para el nuevo modelo en `app/repositories.py`.
 7. Crear un nuevo controlador en `app/controllers.py`.
+
+Algunas modifaciones más específicas podrían no requerir de todos los pasos anteriores, pero en general es una buen
+flujo de trabajo.
+
+## Recomendaciones
+
+- Utilizar el comando `pdm format` para formatear el código antes de hacer un commit.
+- Probar las rutas de la API a través de la documentación luego de agregar o hacer modificaciones para verificar que
+  todo esté funcionando correctamente.
+
+## En caso de errores...
+- Recuerda que en general la última línea de error es la más importante para identificar el problema.
+- Si el error impide que parta el servidor de desarrollo, revisa que no haya errores de sintaxis en el código.

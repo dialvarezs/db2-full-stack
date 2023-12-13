@@ -8,6 +8,16 @@ export interface Book {
   authorId: number | null
   author?: Author
   categories?: Category[]
+  copiesAvailable?: number
+  copies: BookCopy[]
+}
+
+export interface BookCopy {
+  id?: number
+  bookId: number
+  serialNumber: string
+  isAvailable: boolean
+  book?: Book
 }
 
 export interface Author {
