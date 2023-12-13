@@ -1,18 +1,39 @@
-# Vue 3 + TypeScript + Vite
+# Projecto 3 (frontend)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## ¿Cómo configurar el entorno para el proyecto?
 
-## Recommended IDE Setup
+1. Instala las dependencias del proyecto con PNPM
+   ```shell
+   pnpm install
+   ```
+2. Ejecuta el servidor de desarrollo
+   ```shell
+   pnpm dev
+   ```
+3. Si no hay errores, la interfaz estará disponible en http://localhost:5173/.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## ¿Cómo trabajar en el proyecto?
 
-## Type Support For `.vue` Imports in TS
+Al considerar la implementación de nueva página asociada con alguna interacción con la API, se debe seguir el siguiente
+procedimiento:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+1. Crear una nueva interfaz en `interfaces.ts` que sea coherente con el modelo de datos asociado en la API.
+2. Crear una nueva función para interactuar con la ruta de la API en `api/index.ts`.
+3. Crear una nueva vista en `views/` para crear la página que hará uso de la función creada en el paso anterior.
+4. Asociar una ruta en `router/index.ts` para la nueva vista creada en el paso anterior.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Es importante considerar que este flujo de trabajo aplicaría sólo para implementar nuevas páginas, pero en caso de
+querer añadir nuevas funcionalidades o modificar las existentes, es flujo de trabajo será más específico y dependerá
+de la funcionalidad a implementar.
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Recomendaciones
+
+- Utilizar el comando `pnpm format` y `pnpm lint --fix` para formatear el código antes de hacer un commit.
+
+## En caso de errores...
+
+- Recuerda revisar los errores en la consola del navegador.
+- Si el error impide que parta el servidor de desarrollo, revisa que no haya errores de sintaxis en el código.
+- Si el error es un error desde el servidor, revisa que los datos que estás enviando a la API sean adecuados y que
+  la ruta y método que estás utilizando sea la correcta. Esto se puede hacer a través de la pestaña de red en las
+  herramientas de desarrollador del navegador.
